@@ -19,6 +19,9 @@ module.exports = {
     Mutation: {
         async login( parent, {username, password} , context, info){
             const {errors,valid} = validateLoginInput(username, password);
+            if (!valid) {
+                throw new UserInputError('Error', {errors});
+            }
             const user = await User.findOne({username})
             if (!user){
                 errors.general = 'User not found';
