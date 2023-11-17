@@ -1,0 +1,9 @@
+body{
+    margin: 80px;
+}
+.page-title{
+    display: block !important;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
