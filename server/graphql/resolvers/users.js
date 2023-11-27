@@ -83,8 +83,8 @@ module.exports = {
             const token = generateToken(resUser);
 
             return {
-                ...res._doc,
-                id: res._id,
+                ...resUser._doc,
+                id: resUser._id,
                 token
             }
 
