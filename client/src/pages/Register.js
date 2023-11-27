@@ -3,23 +3,21 @@ import {Button, Form, Message} from 'semantic-ui-react';
 import {useMutation, gql} from '@apollo/client';
 import {useNavigate} from 'react-router-dom';
 
+import { useForm } from '../util/hooks';
+
 export default function Register() {
 
 
-const [errors,setErrors] = useState({});
 
-const [values,setValues] = useState({
+const [errors,setErrors] = useState({});
+const navigate= useNavigate();
+
+const {onChange, onSubmit, values} = useForm(registerUser, {
   username:'',
   email:'',
   password:'',
   confirmPassword:''
 })
-
-const navigate= useNavigate();
-
-const onChange =(e) =>{
-  setValues({...values, [e.target.name]:e.target.value});
-}
 
 const [addUser, { loading}] = useMutation(REGiSTER_USER, {
   variables:values,
@@ -35,11 +33,9 @@ const [addUser, { loading}] = useMutation(REGiSTER_USER, {
   }
 });
 
-const onSubmit = (e)=>{
-  e.preventDefault();
+function registerUser() {
   addUser();
 }
-
 
 
   return (
