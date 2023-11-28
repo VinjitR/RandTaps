@@ -7,5 +7,5 @@ export default function AuthRoute() {
 
     const {user} = useContext(AuthContext);
 
-    return(user ? <Navigate to="/" replace/>: <Navigate to="/login" replace/>)
+    return(user ? <Navigate to="/" replace/>: <Outlet/>)
 }
