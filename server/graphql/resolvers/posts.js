@@ -71,7 +71,7 @@ module.exports = {
             if (post){
                 if(post.likes.find(like => like.username === username)){
                     //Already liked, dislike
-                    post.likes.filter(like => like.username !== username)
+                    post.likes = post.likes.filter(like => like.username !== username)
                 }
                 else{
                     //Add like to post
