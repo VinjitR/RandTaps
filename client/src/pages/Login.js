@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Button, Form, Message} from 'semantic-ui-react';
 import {useMutation, gql} from '@apollo/client';
 import {useNavigate} from 'react-router-dom';
 
 import { useForm } from '../util/hooks';
+import { AuthContext } from '../context/auth';
 
 export default function Login() {
+const context = useContext(AuthContext);
 const [errors,setErrors] = useState({});
 const navigate= useNavigate();
 
@@ -18,7 +20,7 @@ const {onChange, onSubmit, values} = useForm(loginUserCallback, {
 const [loginUser, {loading}] = useMutation(LOGIN_USER, {
   variables:values,
   onCompleted: (data)=>{
-    console.log(data);
+    context.login(data.login);
     navigate('/');
   },
   onError: ({graphQLErrors}) =>{
@@ -32,8 +34,6 @@ const [loginUser, {loading}] = useMutation(LOGIN_USER, {
 function loginUserCallback(){
   loginUser();
 }
-
-
 
   return (
     <div className='form-container'>
