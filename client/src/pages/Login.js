@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {Button, Form, Message} from 'semantic-ui-react';
+import {Button, Form} from 'semantic-ui-react';
 import {useMutation, gql} from '@apollo/client';
 import {useNavigate} from 'react-router-dom';
 

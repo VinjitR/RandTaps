@@ -14,7 +14,7 @@ export default function PostForm() {
 
 
 
-    const [createPost, {loading}] = useMutation(CREATE_POST_MUTATION, {
+    const [createPost] = useMutation(CREATE_POST_MUTATION, {
         variables:values,
         onCompleted: (data)=>{
             values.body = '';
@@ -81,4 +81,4 @@ mutation createPost($body: String!){
         }
     }
 }
-`
+`;
