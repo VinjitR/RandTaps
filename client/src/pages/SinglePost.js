@@ -2,12 +2,13 @@ import React, { useContext, useRef, useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/client';
 import moment from 'moment';
-import { Button, Card, Grid, Image, Icon, Label, Form, Input } from 'semantic-ui-react';
+import { Button, Card, Grid, Image, Form, Input } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
 import DeleteButton from '../components/DeleteButton';
 import { useNavigate, useParams } from 'react-router-dom';
+import CommentButton from '../components/CommentButton';
 
 function SinglePost() {
   const {postId} = useParams();
@@ -81,18 +82,7 @@ function SinglePost() {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log('Comment on post')}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                <CommentButton commentCount={commentCount}/>
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
@@ -127,7 +117,7 @@ function SinglePost() {
             {comments.map(comment =>(
                 <Card fluid key={comment.id}>
                     <Card.Content>
-                        {user && user.username == comment.username &&(
+                        {user && user.username === comment.username &&(
                             <DeleteButton postId={id} commentId={comment.id}/>
                         )}
                         <Card.Header>{comment.username}</Card.Header>

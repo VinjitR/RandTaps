@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation , gql } from '@apollo/client';
-import { Button,Icon,Label } from 'semantic-ui-react';
+import { Button,Icon,Label, Popup } from 'semantic-ui-react';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
 
 
@@ -39,12 +39,14 @@ export default function LikeButton({user,post: {id, likes, likeCount}}) {
         )
 
   return (
-   <Button as='div' labelPosition='right' onClick={likePost}>
-    {likeButton}
-    <Label as='a' basic color='teal' pointing='left'>
-     {likeCount}
-    </Label>
-  </Button>
+    <Popup inverted content={liked?"UnLike Post":"Like Post"} trigger={
+        <Button as='div' labelPosition='right' onClick={likePost}>
+            {likeButton}
+            <Label as='a' basic color='teal' pointing='left'>
+            {likeCount}
+            </Label>
+        </Button>
+    } />
   )
 }
 
