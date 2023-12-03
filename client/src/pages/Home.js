@@ -9,10 +9,13 @@ import {FETCH_POSTS_QUERY} from '../util/graphql';
 
 function Home() {
   const {user} = useContext(AuthContext);
-  const {loading, data} = useQuery(FETCH_POSTS_QUERY,
-    {
-      fetchPolicy: 'network-only',
-    });
+  const {loading, data, refetch} = useQuery(FETCH_POSTS_QUERY,    {
+    fetchPolicy: 'network-only',
+  });
+
+  function refetchPosts(){
+    refetch();
+  }
   return (
     <Grid columns={3}>
       <Grid.Row className='page-title'>
@@ -33,7 +36,7 @@ function Home() {
           {
             data.getPosts && data.getPosts.map( post => (
             <Grid.Column key = {post.id} style={{ marginBottom : '20px'}}>
-              <PostCard post = {post}/>
+              <PostCard post = {post} callBack={refetchPosts}/>
             </Grid.Column>
           ))}
           </Transition.Group>

@@ -14,7 +14,6 @@ module.exports = {
                 })
             }
             const post = await Post.findById(postId);
-            console.log(post,body)
             // //find old comment by the user
             // if(username === post.username){
             //     if (post.comments.find(item=> item.body===body)){

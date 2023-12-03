@@ -7,7 +7,7 @@ import { AuthContext } from '../context/auth';
 import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 
-export default function PostCard( {post:{body, createdAt, id, username, likeCount, commentCount, likes}} ) {
+export default function PostCard( {post:{body, createdAt, id, username, likeCount, commentCount, likes}, callBack} ) {
     const {user} = useContext(AuthContext);
 
   return (
@@ -35,7 +35,7 @@ export default function PostCard( {post:{body, createdAt, id, username, likeCoun
       </Label>
     </Button>
       {user && user.username === username && (
-        <DeleteButton postId ={id} />
+        <DeleteButton postId ={id} callback={callBack}/>
       )}
       </Card.Content>
     </Card>
